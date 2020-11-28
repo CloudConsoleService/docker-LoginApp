@@ -1,0 +1,19 @@
+sudo: required
+
+services:
+    - docker
+
+before_install:
+    - docker build -t srikkarey/LoginApp .
+
+script:
+    - docker run srikkarey/LoginApp npm test
+
+after_success:
+    #Login into dockerhub
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+    #Push the image
+    - docker push srikkarey/LoginApp
+
+
