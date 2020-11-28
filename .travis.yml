@@ -4,16 +4,16 @@ services:
     - docker
 
 before_install:
-    - docker build -t srikkarey/LoginApp .
+    - docker build -t srikkarey/loginapp .
 
 script:
-    - docker run srikkarey/LoginApp npm test
+    - docker run srikkarey/loginapp npm test
 
 after_success:
     #Login into dockerhub
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
     #Push the image
-    - docker push srikkarey/LoginApp
+    - docker push srikkarey/loginapp
 
 
